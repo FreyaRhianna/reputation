@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Dashboard from "./Dashboard";
 import "../component-style/index.css";
 
 ReactDOM.render(
   <div>
-    <h1>Reputation</h1>
+    <Dashboard />  
   </div>,
   document.getElementById("indexView")
  );

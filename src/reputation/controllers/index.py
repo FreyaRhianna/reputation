@@ -1,4 +1,4 @@
-from reputation import app
+from reputation import app, mongo
 from flask import render_template
 
 @app.route('/')
