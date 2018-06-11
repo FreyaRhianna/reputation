@@ -1,3 +1,6 @@
 *.pyc
-*node_modules/*
-./static/package-lock.json
+node_modules
+
+dist
+
+package-lock.json

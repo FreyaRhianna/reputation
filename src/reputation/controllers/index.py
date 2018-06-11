@@ -1,5 +1,5 @@
 from reputation import app, mongo, web3
-from flask import render_template
+from flask import render_template, session
 from solc import compile_source
 from web3.contract import ConciseContract
 import flask_fs as fs
@@ -15,10 +15,15 @@ interface = compiled['<stdin>:HelloWorld']
 
 @app.route('/')
 def hello_world():
-    User = mongo.db.users
-    User.insert({'name': 'Test'})
-    return render_template('index.html')
+    print("at hello world")
+    if 'username' in session:
+        print("you have in face been logged in")
+        return "you are logged in as " + session['username']
     
+    return render_template('index.html')
+
+
+
 @app.route('/sayHello')
 def blockchainSendHello():
     HelloWorld = web3.eth.contract(abi=interface['abi'],bytecode=interface['bin'])
