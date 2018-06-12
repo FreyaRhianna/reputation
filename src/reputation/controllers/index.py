@@ -14,7 +14,7 @@ compiled = compile_source(contract_test_code)
 interface = compiled['<stdin>:HelloWorld']
 
 @app.route('/')
-def hello_world():
+def index():
     print("at hello world")
     if 'email' in session:
         print("you have in face been logged in")

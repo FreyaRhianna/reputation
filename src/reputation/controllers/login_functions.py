@@ -17,7 +17,7 @@ def register():
         return jsonify(msg)
                  
     if 'password' not in request_dict:
-        emsg = {'errorOccured' : True,
+        msg = {'errorOccured' : True,
                'errorMessage' : "You need to choose a password"}
         return jsonify(msg)
     
@@ -31,7 +31,7 @@ def register():
                      'password': hashedPass
                     });
         session['email'] = request_dict['email']
-        return redirect(url_for('hello_world'))
+        return redirect(url_for('index'))
     else:
         msg = {'errorOccured' : True,
                'errorMessage' : "An account is already registered with this email"}
@@ -40,13 +40,27 @@ def register():
 @app.route('/post/login/',methods= ['POST'])
 def login():
     User = mongo.db.users
+    request_dict = request.get_json()
+    
+    if 'email' not in request_dict:
+        msg = {'errorOccured' : True,
+               'errorMessage' : "You need to supply an email"}
+        return jsonify(msg)
+                 
+    if 'password' not in request_dict:
+        msg = {'errorOccured' : True,
+               'errorMessage' : "You need to supply a password"}
+        return jsonify(msg)
+    
     existing_user = User.find_one({'email' : request_dict['email']})
     if existing_user:
-        hashedSuppliedPass = bcrypt.hashpw(request_dict['password'].encode('utf-8'), existing_user['password'].encode('utf-8'))
-        if  hashedSuppliedPass == existing_user['password'].encode('utf-8'):
+        hashedSuppliedPass = bcrypt.checkpw(request_dict['password'].encode('utf-8'), existing_user['password'])
+        if  hashedSuppliedPass:
             session['email'] = request_dict['email']
-            return redirect(url_for('hello_world'))
-    return 'Invalid email or password'
+            return redirect(url_for('index'))
+    msg = {'errorOccured' : True,
+           'errorMessage' : "The password or email you supplied doesn't match any registered account"}
+    return jsonify(msg)
 
 @app.route('/get/logout', methods =['GET'])
 def logout():

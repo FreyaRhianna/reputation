@@ -17,7 +17,7 @@ export default class RegisterForm extends React.Component{
         var _this = this;
         if(this.validate()){
             Axios.post('post/register/',{
-                email: this.userEmail.value,
+                email: this.userEmail.value.trim(),
                 password: this.userPassword.value
             })
             .then(function (response){
