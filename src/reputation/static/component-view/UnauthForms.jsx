@@ -13,7 +13,6 @@ export default class UnauthDash extends React.Component{
     }
     
     componentWillReceiveProps(props){
-        console.log(props.Register);
         this.setState({Register: props.Register})
     }
     
@@ -26,12 +25,12 @@ export default class UnauthDash extends React.Component{
             display = <LoginForm />
         }
         return( 
-            <div class="container">
-                <div class="row">
-                    <div class="col-4">
+            <div className="container">
+                <div className="row">
+                    <div className="col-4">
                  
                     </div>
-                    <div class="col-4">
+                    <div className="col-4">
                         {display}
                     </div>
                 </div>

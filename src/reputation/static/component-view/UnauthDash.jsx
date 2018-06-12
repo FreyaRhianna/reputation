@@ -13,7 +13,6 @@ export default class UnauthDash extends React.Component{
     }
     
     registerView(){
-        console.log("Change to rgister");
         this.setState({Register: true});
     }
     

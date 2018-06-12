@@ -1,41 +1,90 @@
 import React from 'react';
 import Axios from 'axios';
+import ErrorMessage from './ErrorMessage';
 
 export default class RegisterForm extends React.Component{
 
     constructor(props){
         super(props);
-        this.login = this.login.bind(this);
+        this.state = {
+            Error: null
+        }
+        this.register = this.register.bind(this);
+        this.validate = this.validate.bind(this);
     }
     
-    login(){
-        Axios.post('post/login/',{
-            
-        })
-        .catch(function(error){
-            console.log(error);
-        })
+    register(){
+        var _this = this;
+        if(this.validate()){
+            Axios.post('post/register/',{
+                email: this.userEmail.value,
+                password: this.userPassword.value
+            })
+            .then(function (response){
+              if(response.data.errorOccured){
+                  _this.setState({Error: response.data.errorMessage})
+              }
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        }
     }
 
+    validate(){
+        this.setState({Error: null})
+        if(this.userEmail.value.trim() == ""){
+            console.log(this.userEmail.value.trim());
+            this.setState({Error: "You need to give an email"});
+            return false;
+        }else if(this.userPassword.value.trim() == ""){
+            this.setState({Error: "You need to choose a password"});
+            return false;
+        }else if(this.userPassword.value != this.userPasswordConf.value){
+            this.setState({Error : "Passwords do not match"});
+            return false;
+        }
+        return true;
+    }
 
     render(){
+        var Alert;
+        if(this.state.Error){
+            Alert = <ErrorMessage message={this.state.Error}/>
+        }else{
+            Alert = null;
+        }
         return( 
-            <form>
+            <div>
                 <div className="form-group">
                     <label className="exampleInputEmail1">Email address</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                    <input type="email"
+                        className="form-control" 
+                        id="email" 
+                        aria-describedby="emailHelp" 
+                        placeholder="Enter email" 
+                        ref={(ele) => this.userEmail = ele} />
                     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div className="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                    <input type="password" 
+                        className="form-control" 
+                        id="password" 
+                        placeholder="Password" 
+                        ref={(ele) => this.userPassword = ele}/>
                 </div>
                 <div className="form-group">
                     <label for="exampleInputPassword1">Confirm Password</label>
-                    <input type="password" className="form-control" id="passwordConfirm" placeholder="Password" />
+                    <input type="password" 
+                        className="form-control" 
+                        id="passwordConfirm" 
+                        placeholder="Password" 
+                        ref={(ele) => this.userPasswordConf = ele}/>
                 </div>
-                <button type="submit" className="btn btn-primary">Register</button>
-            </form>
+                <button style={{marginBottom: 20 + 'px'}} className="btn btn-primary" onClick={this.register}>Register</button>
+                {Alert}
+            </div>
         )
     }
 }

@@ -16,9 +16,9 @@ interface = compiled['<stdin>:HelloWorld']
 @app.route('/')
 def hello_world():
     print("at hello world")
-    if 'username' in session:
+    if 'email' in session:
         print("you have in face been logged in")
-        return "you are logged in as " + session['username']
+        return "you are logged in as " + session['email']
     
     return render_template('index.html')
 
@@ -35,3 +35,11 @@ def blockchainSendHello():
     )
     print(format(helloWorld.functions.greet().call()));
     return render_template('index.html')
+
+
+@app.route('/trying')
+def trying():
+    User = mongo.db.users
+    User.insert({'name': 'alan'})
+    found = User.find_one({'age' : 'alan'})
+    return "Success";
