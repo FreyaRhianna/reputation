@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+import BaseProfile from './personal-profile-view/BaseProfile';
 
 export default class Dashboard extends React.Component{
 
@@ -21,7 +22,8 @@ export default class Dashboard extends React.Component{
                     <div className="form-inline">
                         <button className="btn btn-outline-info my-2 my-sm-0" onClick={this.logout} >Logout</button>
                     </div>
-                </nav>   
+                </nav> 
+                <BaseProfile />
             </div>
         )
     }
