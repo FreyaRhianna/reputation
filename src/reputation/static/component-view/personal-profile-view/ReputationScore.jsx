@@ -21,16 +21,17 @@ export default class ReupationScore extends React.Component{
         const data01 = [{name: 'GoodRep', value: 100, color:"#82ca9d"},
                             {name: 'BadRep', value: 300, color:'#ff5252'}]
         return(
-            <div class="rep-graph-container">
+            <div className="rep-graph-container">
                 <ResponsiveContainer>
                     <PieChart width={730} height={250}>
-                     <Pie stroke="none" data={data01} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={90} outerRadius={110} label>
+                     <Pie stroke="none" data={data01} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={170} outerRadius={210} label>
                         {data01.map((entry,index) => <Cell fill={entry.color} />)}
                              label />
                     </Pie>
                          
                     </PieChart>
                   </ResponsiveContainer>
+                <span className="reputation-label">Reputation Score</span>
             </div>
         )
     }

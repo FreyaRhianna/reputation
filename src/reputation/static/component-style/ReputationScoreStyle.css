@@ -2,5 +2,13 @@
     height:500px;
     width:500px;
     position:absolute;
-    right:0px;
+    right:20%;
+}
+
+.reputation-label{
+    max-width: 50px;
+    position: absolute;
+    top: 200px;
+    right: 300px;
+    font-size: 40px;
 }
