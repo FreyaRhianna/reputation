@@ -62,7 +62,7 @@ def login():
            'errorMessage' : "The password or email you supplied doesn't match any registered account"}
     return jsonify(msg)
 
-@app.route('/get/logout', methods =['GET'])
+@app.route('/get/logout/', methods =['GET'])
 def logout():
     session.clear()
-    return redirect(url_for('hello_world'))
+    return redirect(url_for('index'))

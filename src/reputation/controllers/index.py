@@ -1,5 +1,5 @@
 from reputation import app, mongo, web3
-from flask import render_template, session
+from flask import render_template, session, redirect, url_for
 from solc import compile_source
 from web3.contract import ConciseContract
 import flask_fs as fs
@@ -18,12 +18,15 @@ def index():
     print("at hello world")
     if 'email' in session:
         print("you have in face been logged in")
-        return "you are logged in as " + session['email']
-    
-    return render_template('index.html')
+        #return redirect(url_for("profile"))
+        return render_template('userIndex.html')
+        #return "you are logged in as " + session['email']
+    else:
+        return render_template('index.html')
 
 
 
+#
 @app.route('/sayHello')
 def blockchainSendHello():
     HelloWorld = web3.eth.contract(abi=interface['abi'],bytecode=interface['bin'])
@@ -36,10 +39,3 @@ def blockchainSendHello():
     print(format(helloWorld.functions.greet().call()));
     return render_template('index.html')
 
-
-@app.route('/trying')
-def trying():
-    User = mongo.db.users
-    User.insert({'name': 'alan'})
-    found = User.find_one({'age' : 'alan'})
-    return "Success";

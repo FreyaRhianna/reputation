@@ -2,7 +2,8 @@ const webpack = require('webpack');
 
 const config = {
     entry: {
-        index: __dirname + '/component-view/index.jsx'
+        index: __dirname + '/component-view/index.jsx',
+        userIndex: __dirname + '/component-view/userIndex.jsx'
     },
     output: {
         path: __dirname + '/dist/bundle/',

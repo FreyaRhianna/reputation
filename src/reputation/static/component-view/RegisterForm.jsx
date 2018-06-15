@@ -24,6 +24,7 @@ export default class RegisterForm extends React.Component{
               if(response.data.errorOccured){
                   _this.setState({Error: response.data.errorMessage})
               }
+              window.location = "/"
             })
             .catch(function(error){
                 console.log(error);
@@ -67,7 +68,7 @@ export default class RegisterForm extends React.Component{
                     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div className="form-group">
-                    <label for="exampleInputPassword1">Password</label>
+                    <label>Password</label>
                     <input type="password" 
                         className="form-control" 
                         id="password" 
@@ -75,7 +76,7 @@ export default class RegisterForm extends React.Component{
                         ref={(ele) => this.userPassword = ele}/>
                 </div>
                 <div className="form-group">
-                    <label for="exampleInputPassword1">Confirm Password</label>
+                    <label>Confirm Password</label>
                     <input type="password" 
                         className="form-control" 
                         id="passwordConfirm" 

@@ -25,6 +25,7 @@ export default class LoginForm extends React.Component{
                 if(response.data.errorOccured){
                   _this.setState({Error: response.data.errorMessage})
                 }
+                window.location = "/"
             })
             .catch(function(error){
                 console.log(error);
@@ -60,12 +61,13 @@ export default class LoginForm extends React.Component{
                 ref={(ele) => this.userEmail = ele} />
               </div>
               <div className="form-group">
-                <label for="exampleInputPassword1">Password</label>
+                <label>Password</label>
+                <label>Password</label>
                 <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" 
                 ref={(ele) => this.userPassword = ele} />
               </div>
            
-              <button style={{marginBottom: 20 + 'px'}}  className="btn btn-primary" onClick={this.login}>Login</button>
+              <button style={{marginBottom: 20 + 'px'}} className="btn btn-primary" onClick={this.login}>Login</button>
               {Alert}
             </div>
         )
