@@ -24,8 +24,9 @@ export default class LoginForm extends React.Component{
                 console.log(response);
                 if(response.data.errorOccured){
                   _this.setState({Error: response.data.errorMessage})
+                }else{
+                    window.location = "/"
                 }
-                window.location = "/"
             })
             .catch(function(error){
                 console.log(error);

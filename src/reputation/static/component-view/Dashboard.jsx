@@ -17,7 +17,7 @@ export default class Dashboard extends React.Component{
     render(){
         return( 
             <div>
-                <nav className="navbar navbar-dark bg-dark justify-content-between">
+                <nav className="navbar navbar-dark bg-primary justify-content-between">
                     <a className="navbar-brand">Reputation</a>
                     <div className="form-inline">
                         <button className="btn btn-outline-info my-2 my-sm-0" onClick={this.logout} >Logout</button>

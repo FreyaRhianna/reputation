@@ -15,7 +15,7 @@ export default class ProfileBlurb extends React.Component{
         return(
             <div>
                 
-                <table className="table table-bordered blurb-table">
+                <table className="table table-bordered table-striped blurb-table">
                     <tbody>
                         <tr>
                             <td colspan="2">
