@@ -15,7 +15,28 @@ def register():
         msg = {'errorOccured' : True,
                'errorMessage' : "You need to supply an email"}
         return jsonify(msg)
+    
+    if 'firstName' not in request_dict:
+        msg = {'errorOccured' : True,
+              'errorMessage' : "You need to supply a first name"}
+        return jsonify(msg)
+    
+    if 'familyName' not in request_dict:
+        msg = {'errorOccured' : True,
+              'errorMessage' : "You need to supply a family name"}
+        return jsonify(msg)
+    
+    if 'db' not in request_dict:
+        msg = {'errorOccured' : True,
+              'errorMessage' : "You need to supply a date of birth"}
+        return jsonify(msg)
+    
+    if 'nationality' not in request_dict:
+        msg = {'errorOccured' : True,
+              'errorMessage' : "You need to supply a nationality"}
+        return jsonify(msg)
                  
+        
     if 'password' not in request_dict:
         msg = {'errorOccured' : True,
                'errorMessage' : "You need to choose a password"}
@@ -28,6 +49,10 @@ def register():
     if existing_user is None:
         hashedPass = bcrypt.hashpw(request_dict['password'].encode('utf-8'), bcrypt.gensalt());
         User.insert({'email': request_dict['email'],
+                     'db' : request_dict['db'],
+                     'firstName' : request_dict['firstName'],
+                     'familyName' : request_dict['familyName'],
+                     'nationality' : request_dict['nationality'],
                      'password': hashedPass
                     });
         session['email'] = request_dict['email']

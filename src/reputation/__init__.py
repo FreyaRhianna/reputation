@@ -15,5 +15,6 @@ mongo = PyMongo(app)
 if app:
     print(web3.eth.accounts[0])
     import reputation.controllers.index
-    import reputation.controllers.login_functions
+    import reputation.controllers.login
+    import reputation.controllers.user
 

@@ -16,10 +16,15 @@ export default class RegisterForm extends React.Component{
     register(){
         var _this = this;
         if(this.validate()){
-            Axios.post('post/register/',{
+            var userObj = {
                 email: this.userEmail.value.trim(),
-                password: this.userPassword.value
-            })
+                firstName: this.userFirstName.value.trim(),
+                familyName: this.userFamilyName.value.trim(),
+                nationality: this.userNationality.value.trim(),
+                db: this.userDb.value.trim(),
+                password:this.userPassword.value
+            }
+            Axios.post('post/register/', userObj)
             .then(function (response){
               if(response.data.errorOccured){
                   _this.setState({Error: response.data.errorMessage})
@@ -48,10 +53,15 @@ export default class RegisterForm extends React.Component{
             this.state.Error.push("You need to provide your family name");
             valid = false;
         }
-        if(this.userDb.value.trim() == ""){
-            this.state.Error.push("You need to provide your date of birth");
+        
+        let db = (this.userDb.value.trim())
+        let dbReg = new RegExp("(((^[1-9]{1}\/)|([1-2]{1}[0-9]\/)|(3[0-1]\/))((^[1-9]{1}\/)|([1]{1}[0-2]\/))([0-9]{4}))$");
+        let result = dbReg.exec(db);
+        if(result == null){
+            this.state.Error.push("You need to provide a valid date of birth");
             valid = false;
         }
+        
         if(this.userNationality.value.trim() == ""){
             this.state.Error.push("You need to provide your nationality name");
             valid = false;
