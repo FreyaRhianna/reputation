@@ -3,7 +3,7 @@ import "../../component-style/ReputationScoreStyle.css";
 
 import {PieChart, Pie, Sector, ResponsiveContainer, Cell} from 'recharts'
 
-export default class ReupationScore extends React.Component{
+export default class ReputationScore extends React.Component{
     constructor(props){
         super(props);
         this.state = {

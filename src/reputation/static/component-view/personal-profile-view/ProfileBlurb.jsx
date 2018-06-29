@@ -35,7 +35,7 @@ export default class ProfileBlurb extends React.Component{
                 <table className="table table-bordered table-striped blurb-table">
                     <tbody>
                         <tr>
-                            <td colspan="2">
+                            <td colSpan="2">
                                 <Portrait />
                             </td>
                         </tr>
