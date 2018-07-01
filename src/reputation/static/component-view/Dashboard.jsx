@@ -9,18 +9,18 @@ export default class Dashboard extends React.Component{
         super(props);
         this.state = {
             Profile: true,
-            Search: false
+            Search: null
         }
         this.search = this.search.bind(this);
         this.returnHome = this.returnHome.bind(this);
     }
     
     search(){
-        this.setState({Profile:false,Search:true})
+        this.setState({Profile:false,Search:this.searchTerm.value.trim()})
     }
     
     returnHome(){
-        this.setState({Profile:true,Search:false})
+        this.setState({Profile:true,Search:null})
     }
 
     logout(){
@@ -34,15 +34,15 @@ export default class Dashboard extends React.Component{
         if(this.state.Profile){
             MainDisplay= <BaseProfile />
         }else{
-            MainDisplay = <BaseSearchWall />
+            MainDisplay = <BaseSearchWall SearchTerm={this.state.Search} />
         }
         return( 
             <div>
                 <nav className="navbar navbar-dark bg-primary justify-content-between">
                     <a className="navbar-brand">Reputation</a>
                     <div className="form-inline">
-                          <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                          <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.search}>Search</button>
+                          <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" ref={(ele) => this.searchTerm = ele}/>
+                          <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.search} >Search</button>
                     </div>
                     
                     <div className="form-inline">

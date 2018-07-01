@@ -16,9 +16,9 @@ export default class PersonResult extends React.Component{
     render(){
         return(
             <div className="person-blurb">
-                <span> {this.state.Details.Surname}</span>
-                <span> {this.state.Details.Firstname}</span>
-                <span> {this.state.Details.Nationality}</span>
+                <span> {this.state.Details.familyName}</span>
+                <span> {this.state.Details.firstName}</span>
+                <span> {this.state.Details.nationality}</span>
                 <span> {this.state.Details.db}</span>
             </div>
         )
