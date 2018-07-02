@@ -1,5 +1,5 @@
 import React from 'react';
-import Axios from 'axios';
+
 
 import "../../component-style/ProfileBlurbStyle.css";
 import Portrait from './Portrait';
@@ -8,26 +8,16 @@ export default class ProfileBlurb extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            userDetails:{
-                firstName: null,
-                familyName:null,
-                nationality:null,
-                db:null
-            }
+            UserDetails:props.UserDetails
         }
-        this.fetchUserData = this.fetchUserData.bind(this);
-        this.fetchUserData();
     }
     
-    fetchUserData(){
-        var _this = this;
-        Axios.get('get/userData/')
-        .then(function(response){
-            _this.setState({userDetails: response.data});
-        })
+    componentWillReceiveProps(props){
+        this.setState({UserDetails:props.UserDetails});
     }
+    
+    
 
-    
     
     render(){
         return(
@@ -41,19 +31,19 @@ export default class ProfileBlurb extends React.Component{
                         </tr>
                         <tr>
                             <td>First Name(s): </td>
-                            <td>{this.state.userDetails.firstName}</td>
+                            <td>{this.state.UserDetails.firstName}</td>
                         </tr>
                         <tr>
                             <td>Surname: </td>
-                            <td>{this.state.userDetails.familyName}</td>
+                            <td>{this.state.UserDetails.familyName}</td>
                         </tr>
                         <tr>
                             <td>Nationality: </td>
-                            <td>{this.state.userDetails.nationality}</td>
+                            <td>{this.state.UserDetails.nationality}</td>
                         </tr>
                         <tr>
                             <td>Date Of Birth: </td>
-                            <td>{this.state.userDetails.db}</td>
+                            <td>{this.state.UserDetails.db}</td>
                         </tr>
                     </tbody>
                 </table>

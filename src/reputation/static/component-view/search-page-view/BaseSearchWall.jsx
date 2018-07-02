@@ -10,17 +10,18 @@ export default class BaseSearchWall extends React.Component{
             SearchResults :[]
         }
         this.collectResults = this.collectResults.bind(this);
-        
+        this.loadVisitorProfile = this.loadVisitorProfile.bind(this);
     }
     
     componentDidMount(){
         this.collectResults();
     }
     collectResults(){
-        var _this = this;  //appears to be called each time, but needs to be called twice for update?
+        var _this = this;  
         Axios.post('post/searchPeople/', {
             SearchTerm: this.state.SearchTerm})
             .then(function (response){
+                console.log("Update:" + response.data);
                 _this.setState({SearchResults: response.data})
             })
             .catch(function(error){
@@ -28,9 +29,14 @@ export default class BaseSearchWall extends React.Component{
             })
     }
     
+    loadVisitorProfile(email){
+        const { loadVisitorProfile } = this.props;
+        loadVisitorProfile(email);
+    }
+    
     
     componentWillReceiveProps(props){
-        this.setState({SearchTerm:props.SearchTerm});
+        this.state.SearchTerm = props.SearchTerm; //setState appeared to delay? async?
         this.collectResults();
     }
     
@@ -38,7 +44,7 @@ export default class BaseSearchWall extends React.Component{
     render(){
         return(
             <div >
-                {this.state.SearchResults.map((personData,index)=> <PersonResult  key={personData.familyName + personData.firstName} personData={personData} />)}
+                {this.state.SearchResults.map((personData,index)=> <PersonResult  key={personData.familyName + personData.firstName} personData={personData}  loadVisitorProfile={this.loadVisitorProfile} />)}
             </div>
         )
     }

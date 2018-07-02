@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
-import BaseProfile from './personal-profile-view/BaseProfile';
+import BaseProfile from './profile-view/BaseProfile';
+import BaseVisitorProfile from './profile-view/BaseVisitorProfile';
 import BaseSearchWall from './search-page-view/BaseSearchWall';
 
 export default class Dashboard extends React.Component{
@@ -9,10 +10,17 @@ export default class Dashboard extends React.Component{
         super(props);
         this.state = {
             Profile: true,
-            Search: null
+            Search: null,
+            VisitorProfile : null
         }
         this.search = this.search.bind(this);
         this.returnHome = this.returnHome.bind(this);
+        this.loadVisitorProfile = this.loadVisitorProfile.bind(this);
+    }
+    
+    loadVisitorProfile(email){
+        console.log("passed: " + email);
+        this.setState({Profile:false,Search:null,VisitorProfile:email});
     }
     
     search(){
@@ -33,8 +41,10 @@ export default class Dashboard extends React.Component{
         let MainDisplay = null;
         if(this.state.Profile){
             MainDisplay= <BaseProfile />
+        }else if(this.state.VisitorProfile){
+            MainDisplay = <BaseVisitorProfile VisitorProfileTerm={this.state.VisitorProfile} />
         }else{
-            MainDisplay = <BaseSearchWall SearchTerm={this.state.Search} />
+            MainDisplay = <BaseSearchWall SearchTerm={this.state.Search} loadVisitorProfile={this.loadVisitorProfile} />
         }
         return( 
             <div>

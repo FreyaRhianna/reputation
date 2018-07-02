@@ -17,4 +17,4 @@ if app:
     import reputation.controllers.index
     import reputation.controllers.login
     import reputation.controllers.user
-
+    import reputation.controllers.search
