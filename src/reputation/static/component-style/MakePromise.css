@@ -1,0 +1,20 @@
+.promise-input{
+    width:50%;
+    margin: auto auto 0% 25%;
+    border-radius:20px;
+    min-height:200px;
+    resize:none;
+    padding:20px;
+}
+
+
+.promise-form{
+    width:75%;
+}
+
+.promise-btn{
+    width:10vw;
+    height:200px;
+    border-radius: 0px 50px 50px 0px;
+    font-size:30px;
+}

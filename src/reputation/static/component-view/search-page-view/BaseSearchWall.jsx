@@ -12,12 +12,12 @@ export default class BaseSearchWall extends React.Component{
         this.collectResults = this.collectResults.bind(this);
         this.loadVisitorProfile = this.loadVisitorProfile.bind(this);
     }
-    
+
     componentDidMount(){
         this.collectResults();
     }
     collectResults(){
-        var _this = this;  
+        var _this = this;
         Axios.post('post/searchPeople/', {
             SearchTerm: this.state.SearchTerm})
             .then(function (response){
@@ -28,18 +28,42 @@ export default class BaseSearchWall extends React.Component{
                 console.log(error);
             })
     }
-    
+
     loadVisitorProfile(email){
-        const { loadVisitorProfile } = this.props;
-        loadVisitorProfile(email);
+      var _this = this;
+      Axios.post('post/isLogged/', {
+          SearchTerm: email})
+          .then(function (response){
+            if(response.data){
+              const { returnHome } = _this.props;
+              returnHome();
+            }else{
+              const { loadVisitorProfile } = _this.props;
+              loadVisitorProfile(email);
+            }
+          })
+          .catch(function(error){
+              console.log(error);
+          })
     }
-    
-    
+
+    isLogged(email){
+      Axios.post('post/isLogged/', {
+          SearchTerm: email})
+          .then(function (response){
+            console.log(response.data)
+              return response.data
+          })
+          .catch(function(error){
+              console.log(error);
+          })
+    }
+
     componentWillReceiveProps(props){
         this.state.SearchTerm = props.SearchTerm; //setState appeared to delay? async?
         this.collectResults();
     }
-    
+
 
     render(){
         return(

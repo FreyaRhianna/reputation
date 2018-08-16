@@ -12,7 +12,7 @@ export default class LoginForm extends React.Component{
         this.login = this.login.bind(this);
         this.validate = this.validate.bind(this);
     }
-    
+
     login(){
         var _this = this;
         if(this.validate()){
@@ -31,9 +31,9 @@ export default class LoginForm extends React.Component{
             .catch(function(error){
                 console.log(error);
             })
-        }     
+        }
     }
-    
+
     validate(){
         this.setState({Error: null})
         if(this.userEmail.value.trim() == ""){
@@ -54,20 +54,19 @@ export default class LoginForm extends React.Component{
         }else{
             Alert = null;
         }
-        return( 
+        return(
             <div>
               <div className="form-group">
                 <label className="exampleInputEmail1">Email address</label>
-                <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" 
+                <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"
                 ref={(ele) => this.userEmail = ele} />
               </div>
               <div className="form-group">
                 <label>Password</label>
-                <label>Password</label>
-                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" 
+                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"
                 ref={(ele) => this.userPassword = ele} />
               </div>
-           
+
               <button style={{marginBottom: 20 + 'px'}} className="btn btn-primary" onClick={this.login}>Login</button>
               {Alert}
             </div>

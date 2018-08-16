@@ -17,18 +17,18 @@ export default class Dashboard extends React.Component{
         this.returnHome = this.returnHome.bind(this);
         this.loadVisitorProfile = this.loadVisitorProfile.bind(this);
     }
-    
+
     loadVisitorProfile(email){
         console.log("passed: " + email);
         this.setState({Profile:false,Search:null,VisitorProfile:email});
     }
-    
+
     search(){
-        this.setState({Profile:false,Search:this.searchTerm.value.trim()})
+        this.setState({Profile:false,Search:this.searchTerm.value.trim(),VisitorProfile:null})
     }
-    
+
     returnHome(){
-        this.setState({Profile:true,Search:null})
+        this.setState({Profile:true,Search:null, VisitorProfile:null})
     }
 
     logout(){
@@ -44,9 +44,9 @@ export default class Dashboard extends React.Component{
         }else if(this.state.VisitorProfile){
             MainDisplay = <BaseVisitorProfile VisitorProfileTerm={this.state.VisitorProfile} />
         }else{
-            MainDisplay = <BaseSearchWall SearchTerm={this.state.Search} loadVisitorProfile={this.loadVisitorProfile} />
+            MainDisplay = <BaseSearchWall SearchTerm={this.state.Search} loadVisitorProfile={this.loadVisitorProfile} returnHome={this.returnHome} />
         }
-        return( 
+        return(
             <div>
                 <nav className="navbar navbar-dark bg-primary justify-content-between">
                     <a className="navbar-brand">Reputation</a>
@@ -54,12 +54,12 @@ export default class Dashboard extends React.Component{
                           <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" ref={(ele) => this.searchTerm = ele}/>
                           <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={this.search} >Search</button>
                     </div>
-                    
+
                     <div className="form-inline">
                         <button className="btn btn-outline-info my-2 my-sm-0" onClick={this.returnHome} >Home</button>
                         <button className="btn btn-outline-info my-2 my-sm-0" onClick={this.logout} >Logout</button>
                     </div>
-                </nav> 
+                </nav>
                 {MainDisplay}
             </div>
         )
