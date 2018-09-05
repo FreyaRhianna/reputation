@@ -37,6 +37,17 @@ export default class BaseProfile extends React.Component{
         })
     }
 
+    registerPromise(promise){
+      console.log(promise);
+      Axios.post('post/registerPromise/',{
+          promiseTerm: 'data',
+          promised: 'person1',
+          promiser: 'person2'
+      })
+      .then(function(response){
+      })
+    }
+
 
     render(){
         return(
@@ -46,7 +57,7 @@ export default class BaseProfile extends React.Component{
                     <ReputationScore />
 
                 </div>
-                <MakePromise />
+                <MakePromise  registerPromise={this.registerPromise}/>
             </div>
 
         )
