@@ -3,13 +3,13 @@ from flask import render_template, session, redirect, url_for
 from solc import compile_source
 from web3.contract import ConciseContract
 import flask_fs as fs
-import os 
+import os
 
 '''import 'contracts/HelloWorld.sol' '''
 
 with open("./reputation/static/contracts/HelloWorld.sol","r") as file:
     contract_test_code = ''.join(line.rstrip() for line in file)
-    
+
 compiled = compile_source(contract_test_code)
 interface = compiled['<stdin>:HelloWorld']
 
@@ -38,4 +38,3 @@ def blockchainSendHello():
     )
     print(format(helloWorld.functions.greet().call()));
     return render_template('index.html')
-

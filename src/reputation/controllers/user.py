@@ -1,7 +1,7 @@
 from reputation import app, mongo
 from flask import render_template, session, redirect, url_for, jsonify, json, request
 from bson import json_util
-import os 
+import os
 
 @app.route('/get/userPersonalData/', methods=['GET'])
 def getPersonalUserData():
@@ -15,5 +15,7 @@ def getIndividualVisitorUserData():
     request_dict = request.get_json()
     if 'Email' in request_dict:
         User = mongo.db.users
-        user = User.find_one({'email':request_dict['Email']})
+        user = {}
+        user['personalData'] = User.find_one({'email':request_dict['Email']})
+        user['isLogged'] = session['email'] == request_dict['Email']
         return json.dumps(user, default=json_util.default);

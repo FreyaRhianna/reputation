@@ -2,7 +2,7 @@ from flask import Flask
 from flask_pymongo import PyMongo
 from web3 import Web3, HTTPProvider
 
-    
+
 app = Flask(__name__, static_folder="static/dist", template_folder="static")
 app.config['MONGO_DBNAME'] = 'reputation'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -18,3 +18,4 @@ if app:
     import reputation.controllers.login
     import reputation.controllers.user
     import reputation.controllers.search
+    import reputation.controllers.promises

@@ -14,12 +14,14 @@ export default class BaseProfile extends React.Component{
                 firstName: null,
                 familyName:null,
                 nationality:null,
-                db:null
+                db:null,
+                email:null
             },
             VisitorProfileTerm:props.VisitorProfileTerm
         }
 
         this.fetchUserData = this.fetchUserData.bind(this);
+        this.registerPromise = this.registerPromise.bind(this);
         this.fetchUserData();
     }
 
@@ -41,11 +43,9 @@ export default class BaseProfile extends React.Component{
       console.log(promise);
       Axios.post('post/registerPromise/',{
           promiseTerm: 'data',
-          promised: 'person1',
-          promiser: 'person2'
+          promised: this.state.UserDetails.email
       })
-      .then(function(response){
-      })
+      
     }
 
 
